@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd"> 
+      	<!-- 配置注解扫描器 -->
+      	<context:component-scan base-package="entity"/>
+        <!-- 配置连接池 -->
+        <!-- 1.引入properties文件 -->
+        <context:property-placeholder location="classpath:db.properties"/>
+        <!-- 2.1配置dbcp -->
+        <bean id="dbcp" class="org.apache.commons.dbcp2.BasicDataSource">
+        	<property name="driverClassName" value="${jdbc.driver}"/>
+        	<property name="url" value="${jdbc.url}"/>
+        	<property name="username" value="${jdbc.userName}"/>
+        	<property name="password" value="${jdbc.password}"/>
+        </bean>
+        <bean id="c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+       		 <property name="driverClass" value="${jdbc.driver}"/>
+        	<property name="jdbcUrl" value="${jdbc.url}"/>
+        	<property name="user" value="${jdbc.userName}"/>
+        	<property name="password" value="${jdbc.password}"/>
+        </bean>
+        
+</beans>
